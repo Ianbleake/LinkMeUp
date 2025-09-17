@@ -1,13 +1,10 @@
-import { Button } from "@/components/ui/button"
+import React from 'react'
+import { Navigation } from './Navigation'
 
-function App() {
-
+export const App = ():React.ReactElement => {
   return (
-    <div className="text-lg font-semibold text-emerald-600">
-      hola mundo
-      <Button>Click me</Button>
+    <div className='h-screen w-screen bg-gray-100'>
+      <Navigation/>
     </div>
   )
 }
-
-export default App
