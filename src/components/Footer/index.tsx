@@ -1,7 +1,13 @@
 import React from 'react'
+import { Logo } from '../Logo'
 
 export const Footer = ():React.ReactElement => {
   return (
-    <div>Footer</div>
+    <div className='bg-white min-h-16 flex flex-col items-center justify-center border-t border-gray-200 shadow'>
+      <Logo className='py-5'/>
+      <div className='mb-2'>
+        <p className='text-gray-500 text-sm'>© 2025 <a href='https://github.com/Ianbleake' target='_blank' className='hover:text-emerald-600'>BleakeDev</a>. All rights reserved.</p>
+      </div>
+    </div>
   )
 }
