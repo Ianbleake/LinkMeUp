@@ -1,8 +1,7 @@
 function App() {
 
-
   return (
-    <div>
+    <div className="text-lg font-semibold text-emerald-600">
       hola mundo
     </div>
   )
