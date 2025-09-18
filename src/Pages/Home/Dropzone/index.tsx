@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import type { DragEvent, ChangeEvent } from "react";
 import { FileCard } from "./FileCard";
+import { useFiles } from "@/hooks/useFiles";
+
 
 export const Dropzone = (): React.ReactElement => {
-  
+  const { files, addFiles } = useFiles();
   const [isDragging, setIsDragging] = useState(false);
-  const [files, setFiles] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const allowedTypes = [
     "application/vnd.ms-excel",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "text/csv", 
+    "text/csv",
   ];
 
   const handleFiles = (newFiles: FileList | null) => {
     if (!newFiles) return;
+
     const validFiles: File[] = [];
     const invalidFiles: string[] = [];
 
-    Array.from(newFiles).forEach((file) => {
+    Array.from(newFiles).forEach(file => {
       if (allowedTypes.includes(file.type) || file.name.endsWith(".csv")) {
         validFiles.push(file);
       } else {
@@ -27,15 +29,10 @@ export const Dropzone = (): React.ReactElement => {
       }
     });
 
-    if (invalidFiles.length > 0) {
-      setError(`Formato no permitido: ${invalidFiles.join(", ")}`);
-    } else {
-      setError(null);
-    }
+    if (invalidFiles.length > 0) setError(`Formato no permitido: ${invalidFiles.join(", ")}`);
+    else setError(null);
 
-    if (validFiles.length > 0) {
-      setFiles(validFiles);
-    }
+    if (validFiles.length > 0) addFiles(validFiles); // añade todos los archivos válidos juntos
   };
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
@@ -43,9 +40,7 @@ export const Dropzone = (): React.ReactElement => {
     setIsDragging(true);
   };
 
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
+  const handleDragLeave = () => setIsDragging(false);
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
