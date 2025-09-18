@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import type { DragEvent, ChangeEvent } from "react";
 import { FileCard } from "./FileCard";
 import { useFiles } from "@/hooks/useFiles";
+import { merge } from "@/Utils/mergeStyles";
+import { GoFileSymlinkFile } from "react-icons/go";
+import { twTheme } from "@/Utils/ThemeColors";
 
 
 export const Dropzone = (): React.ReactElement => {
+
   const { files, addFiles } = useFiles();
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -55,13 +59,12 @@ export const Dropzone = (): React.ReactElement => {
 
   return (
     <div className="w-full px-4 flex flex-col gap-2">
+
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition ${
-          isDragging ? "border-blue-500 bg-blue-50" : "border-gray-400"
-        }`}
+        className={ merge(' h-60 border-3 border-dotted rounded-lg p-6 text-center cursor-pointer transition shadow', isDragging ? "border-emerald-600 bg-green-50" : "border-gray-400" )}
         onClick={() => document.getElementById("fileInput")?.click()}
       >
         <input
@@ -72,11 +75,15 @@ export const Dropzone = (): React.ReactElement => {
           className="hidden"
           onChange={handleFileSelect}
         />
-        <p className="text-gray-600">
-          {isDragging
-            ? "Suelta el archivo aquí"
-            : "Arrastra o haz click para subir un archivo (.xls, .xlsx, .csv)"}
-        </p>
+        <div className="flex flex-col items-center justify-center gap-4 h-full">
+          <p className="text-gray-400 font-normal text-xl">
+            {isDragging
+              ? "Suelta el archivo aquí"
+              : "Arrastra o haz click para subir un archivo (.xls, .xlsx, .csv)"}
+          </p>
+          <GoFileSymlinkFile size={40} color={twTheme.colors.gray[400]} />
+        </div>
+
       </div>
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
