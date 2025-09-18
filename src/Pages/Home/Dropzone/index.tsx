@@ -5,9 +5,13 @@ import { useFiles } from "@/hooks/useFiles";
 import { merge } from "@/Utils/mergeStyles";
 import { GoFileSymlinkFile } from "react-icons/go";
 import { twTheme } from "@/Utils/ThemeColors";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 
 export const Dropzone = (): React.ReactElement => {
+
+  const navigate = useNavigate();
 
   const { files, addFiles } = useFiles();
   const [isDragging, setIsDragging] = useState(false);
@@ -89,11 +93,13 @@ export const Dropzone = (): React.ReactElement => {
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
       {files.length > 0 && (
-        <div className="mt-4 overflow-auto h-60">
+        <div className="mt-4 overflow-auto h-60 flex flex-col gap-4">
           {files.map((file, idx) => (
             <FileCard key={idx} file={file} />
           ))}
-          
+          <Button className="bg-emerald-600 cursor-pointer w-fit mx-auto hover:bg-emerald-700 " onClick={()=>navigate('/files')}>
+            Procesar Archivos
+          </Button>
         </div>
       )}
     </div>

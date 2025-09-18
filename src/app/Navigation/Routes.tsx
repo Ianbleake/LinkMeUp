@@ -1,3 +1,4 @@
+import { Files } from "@/Pages/Files";
 import { Home } from "@/Pages/Home";
 import { Info } from "@/Pages/Info";
 import { NotFound } from "@/Pages/NotFound";
@@ -9,6 +10,7 @@ export const Router = (): React.ReactElement => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/info" element={<Info />} />
+      <Route path="/files" element={<Files />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

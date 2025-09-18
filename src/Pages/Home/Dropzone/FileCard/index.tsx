@@ -23,7 +23,7 @@ export const FileCard = ({ file }: FileCardProps): React.ReactElement => {
   }, [file]);
 
   return (
-    <div className="flex items-center justify-between border border-gray-200 rounded-lg shadow-sm p-3 my-2 bg-white">
+    <div className="flex items-center justify-between border border-gray-200 rounded-lg shadow-sm p-3 bg-white">
       <div className="flex items-center gap-3">
         {fileIcon}
         <div>
