@@ -34,42 +34,52 @@ export const Files = (): React.ReactElement => {
 
   useEffect(() => {
     if (!files || files.length === 0) return;
-
+  
     setLoading(true);
-    setContacts([]);
-
-    let processed = 0;
-    const total = files.length;
-
-    for (const file of files) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        const data = new Uint8Array(e.target?.result as ArrayBuffer);
-        const workbook = XLSX.read(data, { type: "array" });
-        const sheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(sheet, {
-          header: 1,
-          defval: "",
-        });
-
-        const [headers, ...rows] = jsonData as string[][];
-        const cleanHeaders = headers.map((h) => h.trim());
-        const formatted = rows.map((row) =>
-          Object.fromEntries(row.map((cell, i) => [cleanHeaders[i], cell]))
-        );
-
-        setContacts((prev) => [...prev, ...(formatted as Contact[])]);
-
-        processed++;
-        if (processed === total) {
-          setLoading(false);
-        }
-      };
-
-      reader.readAsArrayBuffer(file);
-    }
+  
+    const parseFile = (file: File): Promise<Contact[]> => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+  
+        reader.onload = (e) => {
+          try {
+            const data = new Uint8Array(e.target?.result as ArrayBuffer);
+            const workbook = XLSX.read(data, { type: "array" });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, {
+              header: 1,
+              defval: "",
+            });
+  
+            const [headers, ...rows] = jsonData as string[][];
+            const cleanHeaders = headers.map((h) => h.trim());
+            const formatted = rows.map((row) =>
+              Object.fromEntries(row.map((cell, i) => [cleanHeaders[i], cell]))
+            );
+  
+            resolve(formatted as Contact[]);
+          } catch (err) {
+            reject(err);
+          }
+        };
+  
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
+    };
+  
+    Promise.all(files.map(parseFile))
+      .then((results) => {
+        // results es un array de arrays => lo aplanamos
+        const allContacts = results.flat();
+        setContacts(allContacts);
+      })
+      .catch((err) => {
+        console.error("Error parsing files:", err);
+      })
+      .finally(() => setLoading(false));
   }, [files]);
+  
 
   if (loading) return <Loader />;
 
