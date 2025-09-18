@@ -93,6 +93,7 @@ export const Dropzone = (): React.ReactElement => {
           {files.map((file, idx) => (
             <FileCard key={idx} file={file} />
           ))}
+          
         </div>
       )}
     </div>
