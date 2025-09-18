@@ -9,7 +9,7 @@ export const Navigation = (): React.ReactElement => {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className=" flex-1">
+        <main className="flex flex-col flex-1">
           <Router />
         </main>
         <Footer />
