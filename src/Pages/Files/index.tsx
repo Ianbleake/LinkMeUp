@@ -3,11 +3,9 @@ import { Loader } from "./Loader";
 import { useFiles } from "@/hooks/useFiles";
 
 import * as XLSX from "xlsx";
-import { Button } from "@/components/ui/button";
-import { RiContactsBook2Fill } from "react-icons/ri";
-import { twTheme } from "@/Utils/ThemeColors";
 import { EmptyFiles } from "./EmptyFiles";
 import { ContactsTable } from "./ContactsTable";
+import { ContactsExport } from "./ContactsExport";
 
 export const Files = (): React.ReactElement => {
 
@@ -81,10 +79,7 @@ export const Files = (): React.ReactElement => {
           <p className="text-sm text-gray-500" >{ fileCount > 1 ? `Archivos (${fileCount}):` : 'Archivo:'} {fileNames}</p>
         </div>
       
-        <Button className="bg-emerald-600 cursor-pointer hover:bg-emerald-700">
-          Importar contactos
-          <RiContactsBook2Fill size={35} color={twTheme.colors.white} />
-        </Button>
+        <ContactsExport/>
 
       </div>
 
