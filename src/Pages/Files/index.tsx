@@ -70,13 +70,16 @@ export const Files = (): React.ReactElement => {
   if(fileCount === 0) return <EmptyFiles />;
 
   return (
-    <div className="flex-1 flex flex-col p-8">
+    <div className="flex-1 flex flex-col p-4 md:p-8">
 
       <div className="flex flex-col items-center justify-between gap-5 pb-4 px-2 border-b border-gray-200 md:flex-row">
 
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold text-emerald-600 text-center  md:text-left">Contactos importados</h2>
-          <p className="text-sm text-gray-500 text-center md:text-left hidden md:block" >{ fileCount > 1 ? `Archivos (${fileCount}):` : 'Archivo:'} {fileNames}</p>
+          <p className="text-sm text-gray-500 text-center md:text-left">
+            {fileCount > 1 ? `Archivos (${fileCount}):` : 'Archivo:'} {fileNames}
+          </p>
+
         </div>
       
         <ContactsExport contacts={contacts}/>

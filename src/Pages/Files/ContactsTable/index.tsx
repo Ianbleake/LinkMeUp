@@ -16,7 +16,7 @@ export const ContactsTable = ({
   contacts,
 }: ContactsTableProps ):React.ReactElement => {
   return (
-    <div className="px-14 mt-4">
+    <div className="px-1 md:px-14 mt-4">
       <div className="rounded-md border-2 border-gray-200 shadow-sm overflow-hidden">
         <Table>
           <TableHeader>
