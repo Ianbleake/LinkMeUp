@@ -69,6 +69,8 @@ export const Files = (): React.ReactElement => {
 
   if(fileCount === 0) return <EmptyFiles />;
 
+  console.log(contacts);
+
   return (
     <div className="flex-1 flex flex-col p-8">
 
@@ -79,7 +81,7 @@ export const Files = (): React.ReactElement => {
           <p className="text-sm text-gray-500" >{ fileCount > 1 ? `Archivos (${fileCount}):` : 'Archivo:'} {fileNames}</p>
         </div>
       
-        <ContactsExport/>
+        <ContactsExport contacts={contacts}/>
 
       </div>
 
