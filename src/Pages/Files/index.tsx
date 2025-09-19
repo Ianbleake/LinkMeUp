@@ -1,30 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 import { useFiles } from "@/hooks/useFiles";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import * as XLSX from "xlsx";
 import { Button } from "@/components/ui/button";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { twTheme } from "@/Utils/ThemeColors";
 import { EmptyFiles } from "./EmptyFiles";
-
-type Contact = {
-  Nombre: string;
-  Apellido: string;
-  Pais: string;
-  Numero: string;
-  Correo: string;
-  Empresa: string;
-};
+import { ContactsTable } from "./ContactsTable";
 
 export const Files = (): React.ReactElement => {
+
   const { files } = useFiles();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(false);
@@ -102,34 +88,7 @@ export const Files = (): React.ReactElement => {
 
       </div>
 
-      <div className="px-4" >
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>No.</TableHead>
-              <TableHead>Nombre</TableHead>
-              <TableHead>Apellido</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Pais</TableHead>
-              <TableHead>Teléfono</TableHead>
-              <TableHead>Empresa</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {contacts.map((contact, index) => (
-              <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{contact.Nombre}</TableCell>
-                <TableCell>{contact.Apellido}</TableCell>
-                <TableCell>{contact.Correo}</TableCell>
-                <TableCell>{contact.Pais}</TableCell>
-                <TableCell>{contact.Numero || "-"}</TableCell>
-                <TableCell>{contact.Empresa || "-"}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <ContactsTable contacts={contacts} />
 
     </div>
   );
