@@ -93,10 +93,13 @@ export const Dropzone = (): React.ReactElement => {
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
       {files.length > 0 && (
-        <div className="mt-4 overflow-auto h-60 flex flex-col gap-4">
-          {files.map((file, idx) => (
-            <FileCard key={idx} file={file} />
-          ))}
+        <div className="flex flex-col gap-4">
+          <div className="mt-4 overflow-auto h-45 flex flex-col gap-4">
+            {files.map((file, idx) => (
+              <FileCard key={idx} file={file} />
+            ))}
+          </div>
+
           <Button className="bg-emerald-600 cursor-pointer w-fit mx-auto hover:bg-emerald-700 " onClick={()=>navigate('/files')}>
             Procesar Archivos
           </Button>
