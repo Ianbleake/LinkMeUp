@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   TableCell,
   TableRow,
 } from "@/components/ui/table";
 import { EditContactRow } from '../EditContactRow';
-import { useContacts } from '@/hooks/useContacts';
 import { MdModeEditOutline } from "react-icons/md";
 import { twTheme } from '@/Utils/ThemeColors';
 
@@ -18,7 +17,7 @@ export const ContactRow = ({
   index,
 }:ContactRowProps ):React.ReactElement => {
 
-  const { isEditing, setEditing } = useContacts();
+  const [ isEditing, setEditing ] = useState(false);
 
   const handleEdit = ()=>{
     setEditing(!isEditing);
@@ -26,7 +25,7 @@ export const ContactRow = ({
 
   if(isEditing){
     return(
-      <EditContactRow contact={contact} index={index} />
+      <EditContactRow contact={contact} index={index} editState={isEditing} setEditing={setEditing} />
     )
   }
 

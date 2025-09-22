@@ -3,24 +3,25 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table";
-import { useContacts } from '@/hooks/useContacts';
 import { MdEditOff } from "react-icons/md";
 import { twTheme } from '@/Utils/ThemeColors';
 
 type EditContactRowProps = {
   contact: Contact;
   index: number;
+  editState: boolean;
+  setEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const EditContactRow = ({
   contact,
   index,
+  editState,
+  setEditing,
 }:EditContactRowProps ):React.ReactElement => {
 
-  const { isEditing, setEditing } = useContacts();
-
   const handleEdit = ()=>{
-    setEditing(!isEditing);
+    setEditing(!editState);
   }
 
   return (
