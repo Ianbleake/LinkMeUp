@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 
 export type ContactsContextType = {
   contacts: Contact[];
-  setContacts: React.Dispatch<React.SetStateAction<never[]>>
+  setContacts: React.Dispatch<React.SetStateAction<Contact[]>>
 }
 
 type ContactsProviderProps = {
@@ -20,7 +20,7 @@ export const ContactsProvider = ({
   children
 }: ContactsProviderProps ) => {
 
-  const [ contacts, setContacts ] = useState([])
+  const [ contacts, setContacts ] = useState<Contact[]>([])
 
   return (
     <ContactsContext.Provider value={{
