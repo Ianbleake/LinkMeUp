@@ -6,16 +6,13 @@ import { saveAs } from "file-saver";
 import countries from "i18n-iso-countries";
 import esLocale from "i18n-iso-countries/langs/es.json";
 import countryCodeMap from "./Utils/countryCodeMap";
+import { useContacts } from "@/hooks/useContacts";
 
 countries.registerLocale(esLocale);
 
-type ContactsExportProps = {
-  contacts: Contact[];
-};
+export const ContactsExport = (): React.ReactElement => {
 
-export const ContactsExport = ({ 
-  contacts 
-}: ContactsExportProps): React.ReactElement => {
+  const { contacts } = useContacts();
 
   const handleExport = () => {
     const vcfContent = contacts

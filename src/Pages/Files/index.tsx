@@ -6,11 +6,12 @@ import * as XLSX from "xlsx";
 import { EmptyFiles } from "./EmptyFiles";
 import { ContactsTable } from "./ContactsTable";
 import { ContactsExport } from "./ContactsExport";
+import { useContacts } from "@/hooks/useContacts";
 
 export const Files = (): React.ReactElement => {
 
   const { files } = useFiles();
-  const [contacts, setContacts] = useState<Contact[]>([]);
+  const { setContacts } = useContacts();
   const [loading, setLoading] = useState(false);
 
   const fileNames = files?.map(file => file.name).join(", ") || "";
@@ -54,7 +55,6 @@ export const Files = (): React.ReactElement => {
   
     Promise.all(files.map(parseFile))
       .then((results) => {
-        // results es un array de arrays => lo aplanamos
         const allContacts = results.flat();
         setContacts(allContacts);
       })
@@ -62,9 +62,8 @@ export const Files = (): React.ReactElement => {
         console.error("Error parsing files:", err);
       })
       .finally(() => setLoading(false));
-  }, [files]);
+  }, [files,setContacts]);
   
-
   if (loading) return <Loader />;
 
   if(fileCount === 0) return <EmptyFiles />;
@@ -82,11 +81,11 @@ export const Files = (): React.ReactElement => {
 
         </div>
       
-        <ContactsExport contacts={contacts}/>
+        <ContactsExport />
 
       </div>
 
-      <ContactsTable contacts={contacts} />
+      <ContactsTable />
 
     </div>
   );

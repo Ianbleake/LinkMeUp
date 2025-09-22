@@ -2,23 +2,22 @@ import React from 'react'
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ContactRow } from './ContactRow';
+import { useContacts } from '@/hooks/useContacts';
 
-type ContactsTableProps = {
-  contacts: Contact[];
-}
+export const ContactsTable = ():React.ReactElement => {
 
-export const ContactsTable = ({
-  contacts,
-}: ContactsTableProps ):React.ReactElement => {
+  const { contacts } = useContacts();
+
   return (
     <div className="px-1 md:px-14 mt-4">
       <div className="rounded-md border-2 border-gray-200 shadow-sm overflow-hidden">
         <Table>
+          
           <TableHeader>
             <TableRow>
               <TableHead className='border-r-2 border-gray-200 shadow-sm'>
@@ -56,47 +55,15 @@ export const ContactsTable = ({
                   Empresa
                 </p>
               </TableHead>
+              <TableHead>
+
+              </TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
             {contacts.map((contact, index) => (
-              <TableRow key={index}>
-                <TableCell className='border-r-2 border-gray-200 shadow-sm'>
-                  <p className='text-center text-sm text-gray-500'>
-                    {index + 1}
-                  </p>
-                </TableCell>
-                <TableCell className='border-r-2 border-gray-200 shadow-sm'>
-                  <p className='text-center text-sm text-gray-500'>
-                    {contact.Nombre}
-                  </p>
-                </TableCell>
-                <TableCell className='border-r-2 border-gray-200 shadow-sm'>
-                  <p className='text-center text-sm text-gray-500'>
-                    {contact.Apellido}
-                  </p>
-                </TableCell>
-                <TableCell className='border-r-2 border-gray-200 shadow-sm'>
-                  <p className='text-center text-sm text-gray-500'>
-                    {contact.Correo}
-                  </p>
-                </TableCell>
-                <TableCell className='border-r-2 border-gray-200 shadow-sm'>
-                  <p className='text-center text-sm text-gray-500'>
-                    {contact.Pais}
-                  </p>
-                </TableCell>
-                <TableCell className='border-r-2 border-gray-200 shadow-sm'>
-                  <p className='text-center text-sm text-gray-500'>
-                    {contact.Numero || "-"}
-                  </p>
-                </TableCell>
-                <TableCell>
-                  <p className='text-center text-sm text-gray-500'>
-                    {contact.Empresa || "-"}
-                  </p>
-                </TableCell>
-              </TableRow>
+                <ContactRow contact={contact} index={index} />
             ))}
           </TableBody>
         </Table>
