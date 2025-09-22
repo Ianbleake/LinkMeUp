@@ -3,12 +3,11 @@ import React from 'react'
 export const Info = (): React.ReactElement => {
   return (
     <div className="flex flex-col justify-center items-center gap-6 py-6 px-8 md:px-12 max-w-3xl mx-auto">
-      {/* Título principal */}
+      
       <h1 className="text-3xl font-semibold text-emerald-600 self-start text-center md:text-left">
         Acerca de LinkMeUp
       </h1>
 
-      {/* Descripción */}
       <p className="text-justify text-lg font-normal text-gray-600 leading-relaxed">
         LinkMeUp es una herramienta sencilla y ágil para ayudarte a organizar y 
         registrar grandes listas de contactos directamente en tu dispositivo.
@@ -16,7 +15,7 @@ export const Info = (): React.ReactElement => {
         para exportar y usar en cualquier momento.
       </p>
 
-      {/* Sección cómo funciona */}
+      
       <div className="w-full">
         <h2 className="text-2xl font-semibold text-emerald-600 mb-2">
           Cómo funciona
@@ -28,7 +27,6 @@ export const Info = (): React.ReactElement => {
         </ul>
       </div>
 
-      {/* Beneficios */}
       <div className="w-full">
         <h2 className="text-2xl font-semibold text-emerald-600 mb-2">
           Beneficios
@@ -40,7 +38,6 @@ export const Info = (): React.ReactElement => {
         </ul>
       </div>
 
-      {/* Contacto */}
       <div className="w-full">
         <h2 className="text-2xl font-semibold text-emerald-600 mb-2">
           Contacto
