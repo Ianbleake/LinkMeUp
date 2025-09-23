@@ -5,7 +5,9 @@ import {
 } from "@/components/ui/table";
 import { EditContactRow } from '../EditContactRow';
 import { MdModeEditOutline } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 import { twTheme } from '@/Utils/ThemeColors';
+import { useContacts } from '@/hooks/useContacts';
 
 type ContactRowProps = {
   contact: Contact;
@@ -18,9 +20,14 @@ export const ContactRow = ({
 }:ContactRowProps ):React.ReactElement => {
 
   const [ isEditing, setEditing ] = useState(false);
+  const { removeContact } = useContacts();
 
   const handleEdit = ()=>{
     setEditing(!isEditing);
+  }
+
+  const handleRemove = () => {
+    removeContact(contact)
   }
 
   if(isEditing){
@@ -66,9 +73,12 @@ export const ContactRow = ({
           {contact.Empresa || "-"}
         </p>
       </TableCell>
-      <TableCell className='flex items-center justify-center'>
+      <TableCell className='flex flex-row gap-3 items-center justify-center px-4'>
         <button onClick={handleEdit} className=" cursor-pointer">
           <MdModeEditOutline size={25} color={twTheme.colors.emerald[600]} />
+        </button>
+        <button onClick={handleRemove} className="cursor-pointer" >
+          <MdOutlineDelete size={25} color={twTheme.colors.red[600]} />
         </button>
       </TableCell>
     </TableRow>

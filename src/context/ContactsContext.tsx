@@ -5,6 +5,7 @@ export type ContactsContextType = {
   contacts: Contact[];
   setContacts: React.Dispatch<React.SetStateAction<Contact[]>>;
   updateContact: (contact: Contact)=>void;
+  removeContact: (contact: Contact)=>void;
 }
 
 type ContactsProviderProps = {
@@ -16,6 +17,7 @@ export const ContactsContext = createContext<ContactsContextType>({
   contacts: [],
   setContacts: () => {},
   updateContact: () => {},
+  removeContact: () => {},
 })
 
 export const ContactsProvider = ({
@@ -31,6 +33,11 @@ export const ContactsProvider = ({
       )
     );
   };
+
+  const removeContact = (contact: Contact) => {
+    setContacts(prev => prev.filter(c => c.id !== contact.id));
+  };
+  
   
 
   return (
@@ -38,6 +45,7 @@ export const ContactsProvider = ({
       contacts,
       setContacts,
       updateContact,
+      removeContact,
     }}>
       { children }
     </ContactsContext.Provider>
