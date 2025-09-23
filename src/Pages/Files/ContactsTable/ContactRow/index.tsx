@@ -67,7 +67,7 @@ export const ContactRow = ({
         </p>
       </TableCell>
       <TableCell className='flex items-center justify-center'>
-        <button onClick={handleEdit}>
+        <button onClick={handleEdit} className=" cursor-pointer">
           <MdModeEditOutline size={25} color={twTheme.colors.emerald[600]} />
         </button>
       </TableCell>

@@ -13,8 +13,6 @@ export const ContactsTable = ():React.ReactElement => {
 
   const { contacts } = useContacts();
 
-  console.log('contacts:',contacts)
-
   return (
     <div className="px-1 md:px-14 mt-4">
       <div className="rounded-md border-2 border-gray-200 shadow-sm overflow-hidden">

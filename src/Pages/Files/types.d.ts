@@ -1,4 +1,5 @@
 type Contact = {
+  id: string;
   Nombre: string;
   Apellido: string;
   Pais: string;

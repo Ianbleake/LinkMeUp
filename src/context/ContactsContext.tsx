@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 
 export type ContactsContextType = {
   contacts: Contact[];
-  setContacts: React.Dispatch<React.SetStateAction<Contact[]>>
+  setContacts: React.Dispatch<React.SetStateAction<Contact[]>>;
+  updateContact: (contact: Contact)=>void;
 }
 
 type ContactsProviderProps = {
@@ -14,6 +15,7 @@ type ContactsProviderProps = {
 export const ContactsContext = createContext<ContactsContextType>({
   contacts: [],
   setContacts: () => {},
+  updateContact: () => {},
 })
 
 export const ContactsProvider = ({
@@ -22,10 +24,20 @@ export const ContactsProvider = ({
 
   const [ contacts, setContacts ] = useState<Contact[]>([])
 
+  const updateContact = (contact: Contact) => {
+    setContacts(prev =>
+      prev.map(c =>
+        c.id === contact.id ? { ...c, ...contact } : c
+      )
+    );
+  };
+  
+
   return (
     <ContactsContext.Provider value={{
       contacts,
       setContacts,
+      updateContact,
     }}>
       { children }
     </ContactsContext.Provider>

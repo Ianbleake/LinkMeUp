@@ -25,7 +25,7 @@ export const Files = (): React.ReactElement => {
     const parseFile = (file: File): Promise<Contact[]> => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-  
+    
         reader.onload = (e) => {
           try {
             const data = new Uint8Array(e.target?.result as ArrayBuffer);
@@ -35,23 +35,30 @@ export const Files = (): React.ReactElement => {
               header: 1,
               defval: "",
             });
-  
+    
             const [headers, ...rows] = jsonData as string[][];
             const cleanHeaders = headers.map((h) => h.trim());
+    
             const formatted = rows.map((row) =>
               Object.fromEntries(row.map((cell, i) => [cleanHeaders[i], cell]))
             );
-  
-            resolve(formatted as Contact[]);
+    
+            const withId = formatted.map((contact) => ({
+              id: crypto.randomUUID(),
+              ...contact,
+            }));
+    
+            resolve(withId as Contact[]);
           } catch (err) {
             reject(err);
           }
         };
-  
+    
         reader.onerror = reject;
         reader.readAsArrayBuffer(file);
       });
     };
+    
   
     Promise.all(files.map(parseFile))
       .then((results) => {
