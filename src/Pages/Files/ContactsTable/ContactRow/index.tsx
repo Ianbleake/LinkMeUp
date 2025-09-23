@@ -61,14 +61,14 @@ export const ContactRow = ({
           {contact.Numero || "-"}
         </p>
       </TableCell>
-      <TableCell>
+      <TableCell className='border-r-2 border-gray-200 shadow-sm'>
         <p className='text-center text-sm text-gray-500'>
           {contact.Empresa || "-"}
         </p>
       </TableCell>
-      <TableCell>
+      <TableCell className='flex items-center justify-center'>
         <button onClick={handleEdit}>
-        <MdModeEditOutline size={25} color={twTheme.colors.emerald[600]} />
+          <MdModeEditOutline size={25} color={twTheme.colors.emerald[600]} />
         </button>
       </TableCell>
     </TableRow>

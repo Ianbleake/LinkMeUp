@@ -13,6 +13,8 @@ export const ContactsTable = ():React.ReactElement => {
 
   const { contacts } = useContacts();
 
+  console.log('contacts:',contacts)
+
   return (
     <div className="px-1 md:px-14 mt-4">
       <div className="rounded-md border-2 border-gray-200 shadow-sm overflow-hidden">
@@ -50,12 +52,12 @@ export const ContactsTable = ():React.ReactElement => {
                   Teléfono
                 </p>
               </TableHead>
-              <TableHead >
+              <TableHead className='border-r-2 border-gray-200 shadow-sm'>
                 <p className='text-center text-md text-gray-900'>
                   Empresa
                 </p>
               </TableHead>
-              <TableHead>
+              <TableHead className='w-8'>
 
               </TableHead>
             </TableRow>
