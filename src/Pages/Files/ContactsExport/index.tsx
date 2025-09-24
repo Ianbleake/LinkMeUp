@@ -7,10 +7,13 @@ import countries from "i18n-iso-countries";
 import esLocale from "i18n-iso-countries/langs/es.json";
 import countryCodeMap from "./Utils/countryCodeMap";
 import { useContacts } from "@/hooks/useContacts";
+import { useNavigate } from "react-router";
 
 countries.registerLocale(esLocale);
 
 export const ContactsExport = (): React.ReactElement => {
+
+  const navigate = useNavigate();
 
   const { contacts } = useContacts();
 
@@ -40,6 +43,7 @@ export const ContactsExport = (): React.ReactElement => {
 
     const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8" });
     saveAs(blob, "contactos.vcf");
+    navigate("/")
   };
 
   return (
